@@ -3,17 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const questionInput = document.getElementById('question');
     const answerDisplay = document.getElementById('answer');
     const apiKeyInput = document.getElementById('apiKey');
-    const apiKeySection = document.querySelector('.api-key-section');
 
     const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
-
-    // Check if a global API_KEY is defined from config.js
-    // The `window.API_KEY` check is safer and avoids potential ReferenceError
-    if (typeof window.API_KEY !== 'undefined' && window.API_KEY && window.API_KEY !== "PASTE_YOUR_OPENAI_API_KEY_HERE") {
-        apiKeyInput.value = window.API_KEY;
-        // Hide the input section for a cleaner UI since the key is loaded
-        apiKeySection.style.display = 'none';
-    }
 
     askButton.addEventListener('click', getAnswer);
 
@@ -21,9 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const question = questionInput.value.trim();
         const apiKey = apiKeyInput.value.trim();
 
-        if (!apiKey || apiKey === "PASTE_YOUR_OPENAI_API_KEY_HERE") {
-            // This alert is now a fallback if config.js is missing/empty or the key is not set.
-            apiKeySection.style.display = 'flex'; // Ensure the section is visible
+        if (!apiKey) {
             alert('Please enter your OpenAI API key.');
             return;
         }
