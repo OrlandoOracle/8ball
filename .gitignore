@@ -1,0 +1,5 @@
+# Ignore configuration files that may contain sensitive information.
+config.js
+
+# Ignore OS-specific files.
+.DS_Store
